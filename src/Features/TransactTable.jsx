@@ -23,13 +23,17 @@ const TransactContainer = ({ children }) => {
   );
 };
 
-const TransactHeader = () => {
+const TransactHeader = ({ isDescending, handleFn: descendingSwitch }) => {
   return (
     <>
       <thead className="border-b border-neutral-200 bg-[#332D2D] font-medium text-white dark:border-white/10">
         <tr>
-          <th scope="col" className=" px-4 py-3">
-            Date
+          <th
+            scope="col"
+            className=" px-4 py-3 cursor-pointer"
+            onClick={descendingSwitch}
+          >
+            {isDescending ? "Date ↓" : "Date ↑"}
           </th>
           <th scope="col" className=" px-4 py-3">
             Description
@@ -75,9 +79,10 @@ const DeleteBtn = () => {
   );
 };
 
-export const TransactTable = ({ transacts, onChangeMethods }) => {
+export const TransactTable = ({ transacts, onChangeMethods, isDescending }) => {
   const { removeTransact } = useDeleteTransact();
-  const { setID, setDate, setDesc, setVariance, setPrice } = onChangeMethods;
+  const { setID, setDate, setDesc, setVariance, setPrice, descendingSwitch } =
+    onChangeMethods;
 
   async function deleteTarget(target) {
     const id = target._links.self.href.split("/").pop();
@@ -97,7 +102,10 @@ export const TransactTable = ({ transacts, onChangeMethods }) => {
   return (
     <>
       <TransactContainer>
-        <TransactHeader />
+        <TransactHeader
+          handleFn={descendingSwitch}
+          isDescending={isDescending}
+        />
         <tbody>
           {transacts
             ? transacts.map((element, index) => {
