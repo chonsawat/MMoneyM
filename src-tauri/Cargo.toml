@@ -1,6 +1,6 @@
 [package]
-name = "SweetMoney"
-version = "0.0.1"
+name = "MMoneyM"
+version = "1.1.5"
 description = "Money Management Application"
 authors = ["Chonsawat Nakanam"]
 edition = "2021"

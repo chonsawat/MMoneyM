@@ -13,7 +13,8 @@ export function useTransact(pageNumber, descending) {
         ? getTransactDesc(pageNumber)
         : getTransactAsc(pageNumber);
     },
-    staleTime: 1000 * 10,
+    staleTime: 1000 * 5,
+    refetchInterval: 1000 * 5
   });
 
   return { isLoading, transacts, error };
